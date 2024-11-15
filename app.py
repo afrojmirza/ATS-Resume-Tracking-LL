@@ -4,20 +4,38 @@ import PyPDF2 as pdf
 import json
 
 # Configure the API key (no need to use .env)
-#genai.configure(api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
+genai.configure(api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')  # Replace with your actual API key
 
 def get_gemini_response(input_text):
-  model = genai.GenerativeModel(model='gemini-1.5-flash-latest', api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
+  """
+  Generates text using Google GenerativeAI with the latest functionalities.
+
+  Args:
+      input_text: The text prompt for generation.
+
+  Returns:
+      The generated text as a string.
+  """
+  model = genai.GenerativeModel(model='gemini-1.5-flash-latest')
   response = model.generate_content(input_text)
   return response.text
 
 def input_pdf_text(uploaded_file):
-    reader = pdf.PdfReader(uploaded_file)
-    text = ""
-    for page in range(len(reader.pages)):
-        page_content = reader.pages[page].extract_text()
-        text += str(page_content)
-    return text
+  """
+  Extracts text from a PDF file.
+
+  Args:
+      uploaded_file: A file object containing the PDF.
+
+  Returns:
+      The extracted text as a string.
+  """
+  reader = pdf.PdfReader(uploaded_file)
+  text = ""
+  for page in range(len(reader.pages)):
+    page_content = reader.pages[page].extract_text()
+    text += str(page_content)
+  return text
 
 # Prompt Template
 input_prompt = """
@@ -43,11 +61,11 @@ uploaded_file = st.file_uploader("Upload Your Resume", type="pdf", help="Please 
 
 # Submit button
 if st.button("Submit"):
-    if uploaded_file is not None and jd:
-        resume_text = input_pdf_text(uploaded_file)
-        prompt_filled = input_prompt.format(text=resume_text, jd=jd)
-        response = get_gemini_response(prompt_filled)
-        st.subheader("Evaluation Results")
-        st.write(response)
-    else:
-        st.warning("Please provide both the job description and upload your resume.")
+  if uploaded_file is not None and jd:
+    resume_text = input_pdf_text(uploaded_file)
+    prompt_filled = input_prompt.format(text=resume_text, jd=jd)
+    response = get_gemini_response(prompt_filled)
+    st.subheader("Evaluation Results")
+    st.write(response)
+  else:
+    st.warning("Please provide both the job description and upload your resume.")
