@@ -4,11 +4,11 @@ import PyPDF2 as pdf
 import json
 
 # Configure the API key (no need to use .env)
-#genai.configure(api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
+genai.configure(api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
 
 def get_gemini_response(input_text):
-    model = genai.GenerativeModel('gemini-1.5-flash-latest',api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
-    response = model.generate_content(input_text)
+    # Directly call the generative model without trying to pass the api_key here
+    response = genai.generate_text(model='gemini-1.5-flash-latest', prompt=input_text)
     return response.text
 
 def input_pdf_text(uploaded_file):
