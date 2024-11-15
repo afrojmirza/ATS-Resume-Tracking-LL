@@ -3,12 +3,11 @@ import google.generativeai as genai
 import PyPDF2 as pdf
 import json
 
-# Configure the API key (no need to use .env)
+# Configure the API key
 genai.configure(api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
 
 def get_gemini_response(input_text):
-    # Directly call the generative model without trying to pass the api_key here
-    response = genai.generate_text(model='gemini-1.5-flash-latest', prompt=input_text)
+    response = genai.ChatGoogleGenerativeAI(model='gemini-1.5-flash-latest').generate_text(input_text)
     return response.text
 
 def input_pdf_text(uploaded_file):
