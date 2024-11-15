@@ -7,8 +7,9 @@ import json
 genai.configure(api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
 
 def get_gemini_response(input_text):
-    response = genai.ChatGoogleGenerativeAI(model='gemini-1.5-flash-latest').generate_text(input_text)
-    return response.text
+    # Use the ChatGoogleGenerativeAI API to generate a response
+    response = genai.generate_text(model='gemini-1.5-flash-latest', prompt=input_text)
+    return response.result  # Access the result text from the response object
 
 def input_pdf_text(uploaded_file):
     reader = pdf.PdfReader(uploaded_file)
