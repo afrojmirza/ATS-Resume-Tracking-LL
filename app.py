@@ -1,5 +1,7 @@
 import streamlit as st
-import google.generativeai as genai
+from langchain.prompts import PromptTemplate
+from langchain_google_genai import GoogleGenerativeAI
+from langchain.chains import LLMChain
 import PyPDF2 as pdf
 import json
 
@@ -10,7 +12,7 @@ def get_gemini_response(input_text):
   """
   This function generates text using the Gemini model and returns the response.
   """
-  model = genai.GenerativeModel(model='gemini-1.5-flash-latest', api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')  # Replace with your actual API key
+  model = GoogleGenerativeAI(model='gemini-1.5-flash-latest', api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')  # Replace with your actual API key
   response = model.generate_content(input_text)
   return response.text
 
