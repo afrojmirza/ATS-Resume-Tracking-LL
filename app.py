@@ -3,8 +3,11 @@ import google.generativeai as genai
 import PyPDF2 as pdf
 import json
 
+# Configure the API key (no need to use .env)
+genai.configure(api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
+
 def get_gemini_response(input_text):
-    model = genai.GenerativeModel('gemini-1.5-flash-latest', api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
+    model = genai.GenerativeModel('gemini-1.5-flash-latest')
     response = model.generate_content(input_text)
     return response.text
 
