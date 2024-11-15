@@ -7,9 +7,9 @@ import json
 #genai.configure(api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
 
 def get_gemini_response(input_text):
-    model = genai.GenerativeModel(model='gemini-1.5-flash-latest',api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
-    response = model.generate_content(input_text)
-    return response.text
+  model = genai.GenerativeModel(model='gemini-1.5-flash-latest', api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')
+  response = model.generate_content(input_text)
+  return response.text
 
 def input_pdf_text(uploaded_file):
     reader = pdf.PdfReader(uploaded_file)
