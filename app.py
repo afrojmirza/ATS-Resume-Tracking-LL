@@ -3,32 +3,20 @@ import google.generativeai as genai
 import PyPDF2 as pdf
 import json
 
-# Configure the API key (no need to use .env)
-genai.configure(api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')  # Replace with your actual API key
+# Configure the API key (no need to use .env) (Optional)
+# genai.configure(api_key='YOUR_API_KEY')  # Replace with your actual API key
 
 def get_gemini_response(input_text):
   """
-  Generates text using Google GenerativeAI with the latest functionalities.
-
-  Args:
-      input_text: The text prompt for generation.
-
-  Returns:
-      The generated text as a string.
+  This function generates text using the Gemini model and returns the response.
   """
-  model = genai.GenerativeModel(model='gemini-1.5-flash-latest')
+  model = genai.GenerativeModel(model='gemini-1.5-flash-latest', api_key='AIzaSyAmRMUmWsJRtFPd8spj0SdgagPzDFS4Nl0')  # Replace with your actual API key
   response = model.generate_content(input_text)
   return response.text
 
 def input_pdf_text(uploaded_file):
   """
-  Extracts text from a PDF file.
-
-  Args:
-      uploaded_file: A file object containing the PDF.
-
-  Returns:
-      The extracted text as a string.
+  This function extracts text from the uploaded PDF file.
   """
   reader = pdf.PdfReader(uploaded_file)
   text = ""
